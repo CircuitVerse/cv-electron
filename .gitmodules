@@ -1,0 +1,3 @@
+[submodule "Cv-frontend"]
+	path = Cv-frontend
+	url = https://github.com/shubhankarsharma00/Cv-frontend.git
