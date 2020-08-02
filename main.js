@@ -6,8 +6,8 @@ const fs = require('fs')
 function createWindow() {
     // Create the browser window.
     const mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1920,
+        height: 1080,
         icon: __dirname + '/favicon.png',
         webPreferences: {
             nodeIntegration: true, 
@@ -30,11 +30,15 @@ function createWindow() {
         dialog.showSaveDialog(mainWindow, {
             defaultPath: `./file/${name}.json`
         }).then(result => {
-            mainWindow.webContents.send("setLogix", result.filePath)
-            fs.writeFile(result.filePath, data, function (err) {
-                if (err) { return console.log('error is writing new file') }
-                mainWindow.webContents.send("message", `Start editing ${result.filePath}`)
-            });
+            if (result.canceled) {
+                mainWindow.webContents.send("message", `Did not save`)
+            } else {
+                mainWindow.webContents.send("setLogix", result.filePath)
+                fs.writeFile(result.filePath, data, function (err) {
+                    if (err) { return console.log('error is writing new file') }
+                    mainWindow.webContents.send("message", `Start editing ${result.filePath}`)
+                });
+            }
         }).catch(err => {
             console.log(err)
         });
@@ -43,12 +47,16 @@ function createWindow() {
         dialog.showOpenDialog(mainWindow, {
             properties: ['openFile']
         }).then(result => {
-            mainWindow.webContents.send("setLogix", result.filePaths[0])
-            fs.readFile(result.filePaths[0], 'utf8', (err, data) => {
-                if (err) throw err;
-                console.log(data);
-                mainWindow.webContents.send("loadData",data)
-            });
+            if (result.canceled) {
+                mainWindow.webContents.send("message", `Did not Open`)
+            } else {
+                mainWindow.webContents.send("setLogix", result.filePaths[0])
+                fs.readFile(result.filePaths[0], 'utf8', (err, data) => {
+                    if (err) throw err;
+                    console.log(data);
+                    mainWindow.webContents.send("loadData",data)
+                });
+            }
         }).catch(err => {
             console.log(err)
         });
