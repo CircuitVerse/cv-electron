@@ -10,7 +10,7 @@ We follow the [Code of Conduct](code-of-conduct.md) of the [CircuitVerse](https:
 
 ## Setup
 - Install [npm](https://www.npmjs.com/get-npm)
-- `npm install:all (for simulator and electron packages)`
+- `npm run install:all (for simulator and electron packages)`
 
 To run it one time:
 - `npm run build`
@@ -19,7 +19,7 @@ To run it one time:
 To start development server:
 - `cd Cv-frontend && npm run start`
 -  change `index.html` to `indexDev.html` in main.js. (To be changed soon)
--  npm start
+-  `npm start`
 
 To run tests:
 - `cd Cv-frontend && npm run test`
