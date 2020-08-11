@@ -16,7 +16,7 @@ function createWindow() {
     })
     Menu.setApplicationMenu(null)
     // and load the index.html of the app.
-    mainWindow.loadFile('Cv-frontend/index.html')
+    mainWindow.loadFile('Cv-frontend/indexDev.html')
     ipcMain.on("overwrite", (e, { dir, data }) => {
         console.log(dir)
         fs.writeFile(dir, data, function (err) {
@@ -41,6 +41,22 @@ function createWindow() {
             }
         }).catch(err => {
             console.log(err)
+        });
+    })
+    ipcMain.on("saveOnline", (e, { name, data,image }) => {
+        console.log(name, data, image)
+        let child = new BrowserWindow({ parent: mainWindow, show: false })
+        child.webContents.openDevTools()
+        child.loadURL("https://circuitverse.org/simulator")
+        child.once('ready-to-show', () => {
+            child.show()
+        })
+        child.webContents.executeJavaScript('localStorage.setItem("recover_login",' + JSON.stringify(data) + ');', true)
+        child.webContents.executeJavaScript("window.location.href = 'https://circuitverse.org/users/sign_in'", true)
+        child.webContents
+        .executeJavaScript('localStorage.getItem("recover_login");', true)
+        .then(result => {
+            console.log(result);
         });
     })
     ipcMain.on("open", (e) => {
