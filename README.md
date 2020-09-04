@@ -17,12 +17,12 @@ To run it one time:
 -  npm start
 
 To start development server:
-- `cd Cv-frontend && npm run start`
+- `cd cv-frontend && npm run start`
 -  change `index.html` to `indexDev.html` in main.js. (To be changed soon)
 -  `npm start`
 
 To run tests:
-- `cd Cv-frontend && npm run test`
+- `cd cv-frontend && npm run test`
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
