@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "cd Cv-frontend && npm run build",
-    "install:all": "npm install && cd Cv-frontend && npm install",
+    "build": "cd cv-frontend && npm run build",
+    "install:all": "npm install && cd cv-frontend && npm install",
     "package:linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out"
   },
   "author": "@shubhankarsharma00",

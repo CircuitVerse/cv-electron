@@ -16,7 +16,7 @@ function createWindow() {
     })
     Menu.setApplicationMenu(null)
     // and load the index.html of the app.
-    mainWindow.loadFile('Cv-frontend/indexDev.html')
+    mainWindow.loadFile('cv-frontend/index.html')
     ipcMain.on("overwrite", (e, { dir, data }) => {
         console.log(dir)
         fs.writeFile(dir, data, function (err) {
@@ -78,7 +78,7 @@ function createWindow() {
         });
     });
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
