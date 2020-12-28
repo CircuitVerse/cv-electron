@@ -16,7 +16,12 @@ function createWindow() {
     })
     Menu.setApplicationMenu(null)
     // and load the index.html of the app.
-    mainWindow.loadFile('cv-frontend/indexDev.html')
+    if(process.env.NODE_ENV==="production"){
+        mainWindow.loadFile('cv-frontend/index.html')
+    }
+    else{
+        mainWindow.loadFile('cv-frontend/indexDev.html')
+    }
     ipcMain.on("overwrite", (e, { dir, data }) => {
         console.log(dir)
         fs.writeFile(dir, data, function (err) {
